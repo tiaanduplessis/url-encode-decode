@@ -15,6 +15,7 @@
     - [About](#about)
     - [Install](#install)
     - [Usage](#usage)
+    - [TypeScript](#typescript)
     - [Contribute](#contribute)
     - [License](#license)
 
@@ -46,6 +47,33 @@ decode('Hi%21+How%3F+%26+you+person%2F%5C') // `Hi! How? & you person/\\`
 
 ```
 
+## TypeScript
+
+Type declarations are included; a separate `@types` package is not needed.
+
+```ts
+import codec = require('url-encode-decode')
+
+const encoded: string = codec.encode('hello world')
+const decoded: string = codec.decode(encoded)
+```
+
+Both functions accept an optional string and return a string. Omitting the
+argument or passing `undefined` returns an empty string. Non-string inputs throw
+an error; malformed Unicode passed to `encode` or malformed percent-encoded data
+passed to `decode` throws a `URIError`.
+
+For native Node.js ES modules, use the CommonJS package's default import:
+
+```ts
+import codec from 'url-encode-decode'
+
+codec.decode(codec.encode('hello world'))
+```
+
+When compiling default imports to CommonJS, enable `esModuleInterop` in your
+TypeScript configuration.
+
 ## Contribute
 
 1. Fork it and create your feature branch: `git checkout -b my-new-feature`
@@ -53,7 +81,9 @@ decode('Hi%21+How%3F+%26+you+person%2F%5C') // `Hi! How? & you person/\\`
 3. Push to the branch: `git push origin my-new-feature`
 4. Submit a pull request
 
+Run `npm test` for the JavaScript and strict TypeScript tests, and `npm run lint`
+for JavaScript formatting checks.
+
 ## License
 
 MIT
-    
